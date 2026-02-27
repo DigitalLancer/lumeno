@@ -15,8 +15,8 @@ async function DashboardWeatherForecast() {
     const forecastDays = data.forecast.forecastday;
     return (
         <div className='w-full flex justify-around'>
-            {forecastDays.map((forecastDay) => (
-                <WeatherGroup key={forecastDay.date} {...forecastDay}/>
+            {forecastDays.map((forecastDay, index) => (
+                <WeatherGroup key={forecastDay.date} {...forecastDay} {...(index === 0 && { active: true })}/>
             ))}
         </div>
     )

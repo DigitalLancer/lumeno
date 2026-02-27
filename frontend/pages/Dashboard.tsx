@@ -18,15 +18,15 @@ async function Dashboard() {
                 {/* RIGHT — korunur */}
                 <div className="grid grid-cols-2 md:grid-cols-1 md:grid-rows-5 gap-5 h-full min-w-65">
                     <div className="grid grid-cols-2 gap-5 md:row-span-3">
-                        <div className="bg-gray-300 rounded-2xl min-w-30">
+                        <div className="bg-white shadow rounded-2xl min-w-30">
                             Left
                         </div>
-                        <div className="bg-gray-300 rounded-2xl min-w-30">
+                        <div className="bg-white shadow rounded-2xl min-w-30">
                             Right
                         </div>
                     </div>
 
-                    <div className="bg-white shadow h-full rounded-2xl md:row-span-2 flex items-center justify-center p-2">
+                    <div className="bg-white shadow h-full rounded-2xl md:row-span-2 flex items-center justify-center p-2 overflow-hidden">
                         <DashboardWeatherForecast/>
                     </div>
                 </div>

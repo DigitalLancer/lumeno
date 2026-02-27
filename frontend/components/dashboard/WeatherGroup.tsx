@@ -3,14 +3,21 @@ import Image from 'next/image'
 import React from 'react'
 
 function getTurkishDayName(dateStr: string) {
-  return new Intl.DateTimeFormat("tr-TR", {
-    weekday: "short",
-  }).format(new Date(dateStr));
+    return new Intl.DateTimeFormat("tr-TR", {
+        weekday: "short",
+    }).format(new Date(dateStr));
 }
 
-function WeatherGroup(props: ForecastDay) {
+type WeatherGroupProps = ForecastDay & {
+  active?: boolean
+}
+
+function WeatherGroup({active, ...props}: WeatherGroupProps) {
     return (
-        <div className='flex flex-col items-center'>
+        <div className={`
+        flex flex-col items-center pb-2
+        ${active ? "border-b-2 border-blue-500" : ""}
+      `}>
             <div>
                 {getTurkishDayName(props.date)}
             </div>
@@ -18,8 +25,8 @@ function WeatherGroup(props: ForecastDay) {
                 <Image
                     src={`https:${props.day.condition.icon}`}
                     alt={props.day.condition.text}
-                    width={48}
-                    height={48}
+                    width={36}
+                    height={36}
                 />
             </div>
             <div>
