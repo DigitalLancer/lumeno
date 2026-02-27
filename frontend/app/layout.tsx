@@ -30,7 +30,7 @@ export default function RootLayout({
       >
         <div className="flex h-screen overflow-hidden">
           <Navbar></Navbar>
-          <main className="flex-1 min-h-screen overflow-y-auto p-4">
+          <main className="flex-1 min-h-screen overflow-y-auto p-10">
             {children}
           </main>         
         </div>

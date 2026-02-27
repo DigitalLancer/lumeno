@@ -1,6 +1,5 @@
   .sidebar {
     width: 120px;
-    height: 95vh;
     top: 0;
     flex-direction: column;
     gap: 12;

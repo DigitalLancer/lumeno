@@ -15,7 +15,7 @@ export default function VerticalNavbar() {
   ];
 
   return (
-    <aside className="sidebar bg-[#8B5CF6] p-1.5 text-white ml-2 my-2 rounded-lg hidden lg:block">
+    <aside id="sidebar" className="bg-[#8B5CF6] p-1.5 text-white hidden md:block h-full w-35">
       <h2 className="logo">My App</h2>
       <nav className="flex flex-col gap-2">
         {menu.map((item) => {
