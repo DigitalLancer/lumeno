@@ -1,4 +1,4 @@
-import { DailyDisplay } from '@/types/weather'
+import { DailyForecastDisplay } from '@/types/weather'
 import Image from 'next/image'
 import { getWmoInfo, getLocalWeatherIconPath } from "@/lib/wmoIcons";
 
@@ -8,7 +8,7 @@ function getTurkishDayName(dateStr: string) {
     }).format(new Date(dateStr));
 }
 
-type WeatherGroupProps = DailyDisplay & {
+type WeatherGroupProps = DailyForecastDisplay & {
     active?: boolean
 }
 

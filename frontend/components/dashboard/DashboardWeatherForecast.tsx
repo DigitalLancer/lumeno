@@ -1,4 +1,4 @@
-import { ForecastResponse, DailyResponse, DailyDisplay } from '@/types/weather';
+import { ForecastResponse, DailyForecastResponse, DailyForecastDisplay } from '@/types/weather';
 import React from 'react'
 import WeatherGroup from './WeatherGroup';
 import { getWmoInfo, getLocalWeatherIconPath } from "@/lib/wmoIcons";
@@ -9,7 +9,7 @@ async function getWeatherData(): Promise<ForecastResponse> {
     return res.json();
 }
 
-export function toDailyRows(daily: DailyResponse): DailyDisplay[] {
+export function mergeApiData(daily: DailyForecastResponse): DailyForecastDisplay[] {
     const len = daily.time.length;
 
     return Array.from({ length: len }, (_, i) => ({
@@ -23,7 +23,7 @@ export function toDailyRows(daily: DailyResponse): DailyDisplay[] {
 
 async function DashboardWeatherForecast() {
     const data = await getWeatherData();
-    const forecast = toDailyRows(data.daily);
+    const forecast = mergeApiData(data.daily);
     console.log(forecast);
     return (
         <div className='w-full flex justify-around'>

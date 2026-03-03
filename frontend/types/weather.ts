@@ -6,7 +6,7 @@ export type OpenMeteoDailyUnits = {
   temperature_2m_min: "°C";
 };
 
-export type DailyResponse = {
+export type DailyForecastResponse = {
   time: string[];
   weather_code: number[];
   rain_sum: number[];
@@ -14,7 +14,7 @@ export type DailyResponse = {
   temperature_2m_min: number[];
 };
 
-export type DailyDisplay = {
+export type DailyForecastDisplay = {
   date: string;
   weatherCode: number;
   tempMax: number;
@@ -31,5 +31,5 @@ export type ForecastResponse = {
   timezone_abbreviation: string;
   elevation: number;
   daily_units: OpenMeteoDailyUnits;
-  daily: DailyResponse;
+  daily: DailyForecastResponse;
 };
