@@ -17,7 +17,7 @@ function DashboardHero() {
         <h1 className="text-3xl font-bold text-gray-900 absolute top-10 left-10">
           Welcome back John Doe
         </h1>
-        <button className='text-white px-8 py-3 rounded-4xl absolute bottom-6 right-10 border-none cursor-pointer shadow bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-colors'>Quick add event</button>
+        <button className='text-white px-8 py-3 rounded-4xl absolute bottom-6 right-10 border-none cursor-pointer shadow bg-indigo-600 hover:bg-indigo-700 transition-colors font-semibold'>Quick add event</button>
       </div>
     </div>
   )

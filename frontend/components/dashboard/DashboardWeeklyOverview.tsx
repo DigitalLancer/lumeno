@@ -46,10 +46,22 @@ function DashboardWeeklyOverview() {
         majorGridLines: { width: 0 },
         majorTickLines: { width: 0 },
         lineStyle: { width: 0 },
+        labelStyle: {
+            fontFamily: "Arial",
+            fontWeight: "500",
+            color: "#0f172b"
+        }
+
     }
     const primaryYAxis: AxisModel = {
         title: "Event Count",
-        interval: 1
+        interval: 1,
+        titleStyle: {
+            fontFamily: "Arial",
+            size: "14px",
+            fontWeight: "500",
+            color: "#0f172b"
+        }
     }
     const marker: MarkerSettingsModel = { dataLabel: { visible: true } };
 
@@ -64,10 +76,9 @@ function DashboardWeeklyOverview() {
     }
     return (
         <div className="relative">
-
             <ChartComponent id="charts" primaryXAxis={primaryXAxis}
-                primaryYAxis={primaryYAxis} title='Weekly Overview'
-                width="100%" height='200px' pointRender={pointRender}>
+                primaryYAxis={primaryYAxis}
+                width="100%" height='100%' pointRender={pointRender}>
                 <Inject services={[ColumnSeries, Legend, Tooltip, DataLabel, Category, DateTime, StripLine]} />
                 <SeriesCollectionDirective>
                     <SeriesDirective dataSource={dataSet} xName='x' yName='y' type='Column' columnWidth={0.4} fill='blue' />
