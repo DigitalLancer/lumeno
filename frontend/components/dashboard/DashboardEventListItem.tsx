@@ -35,7 +35,7 @@ function DashboardEventListItem({ data,index }: EventCardProps) {
                 </div>
                 <div className={`right py-2 px-3 bg-gray-50/90 rounded-4xl flex items-center gap-1.5`}>
                     <FontAwesomeIcon icon={faClock} className={`${textColor}`}/>
-                    <p className={`${textColor} font-medium`}>{formatDate(new Date(data.startDate))} • {time}</p>
+                    <p className={`${textColor} font-medium`}>{formatDate(new Date(data.startDate), "long")} • {time}</p>
                 </div>
             </div>
 

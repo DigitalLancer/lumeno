@@ -12,18 +12,18 @@ import type { EventItem } from '@/types/event'
 type ChartPoint = { x: string; y: number; isToday: boolean }
 function getWeeklyChartData(events: EventItem[]): ChartPoint[] {
     const weekDays = getCurrentWeekDays()
-    const todayKey = formatDate(new Date())
+    const todayKey = formatDate(new Date(),"short")
 
     const map: Record<string, number> = {}
-    for (const d of weekDays) map[formatDate(d)] = 0
+    for (const d of weekDays) map[formatDate(d,"short")] = 0
 
     for (const e of events) {
-        const key = formatDate(new Date(e.startDate))
+        const key = formatDate(new Date(e.startDate),"short")
         if (key in map) map[key] += 1
     }
 
     return weekDays.map(d => {
-        const key = formatDate(d)
+        const key = formatDate(d,"short")
         return { x: key, y: map[key], isToday: key === todayKey }
     })
 }
@@ -37,7 +37,7 @@ function DashboardWeeklyOverview() {
     }, [])
 
     const dataSet = getWeeklyChartData(events);
-    console.log(dataSet);
+    
     const weekDays = getCurrentWeekDays();
 
     const primaryXAxis: AxisModel = {
@@ -75,10 +75,10 @@ function DashboardWeeklyOverview() {
         }
     }
     return (
-        <div className="relative">
+        <div className="w-full h-full min-w-0 overflow-hidden">
             <ChartComponent id="charts" primaryXAxis={primaryXAxis}
                 primaryYAxis={primaryYAxis}
-                width="100%" height='100%' pointRender={pointRender}>
+                width="100%" height="120px" pointRender={pointRender}>
                 <Inject services={[ColumnSeries, Legend, Tooltip, DataLabel, Category, DateTime, StripLine]} />
                 <SeriesCollectionDirective>
                     <SeriesDirective dataSource={dataSet} xName='x' yName='y' type='Column' columnWidth={0.4} fill='blue' />

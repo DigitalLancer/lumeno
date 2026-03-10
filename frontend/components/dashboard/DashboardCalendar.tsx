@@ -4,7 +4,10 @@ import { CalendarComponent } from '@syncfusion/ej2-react-calendars';
 
 function DashboardCalendar() {
   return (
-      <CalendarComponent cssClass="dashboard-calendar h-full w-full"></CalendarComponent>
+    <div className="w-full h-full">
+      <CalendarComponent cssClass="dashboard-calendar"></CalendarComponent>
+    </div>
+
   )
 }
 

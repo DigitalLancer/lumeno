@@ -18,6 +18,12 @@ export function getCurrentWeekDays() {
   return week
 }
 
-export function formatDate(d: Date) {
+export function formatDate(d: Date, format: string) {
+  if (format === "short") {
+    return d.toLocaleDateString("en-EN", { day: "numeric", month: "short" })
+  }
+  else{
     return d.toLocaleDateString("en-EN", { day: "numeric", month: "long" })
+  }
+
 }

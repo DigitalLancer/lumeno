@@ -15,7 +15,7 @@ function DashboardEventList() {
     }, [])
 
     return (
-        <div className='mt-3 flex flex-col gap-4 overflow-hidden'>
+        <div className='mt-3 flex flex-col gap-4'>
             {events.map((event,index) => (
                 <DashboardEventListItem data={event} key={event.id} index={index}/>
             ))}

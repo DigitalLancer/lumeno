@@ -5,5 +5,6 @@ export interface EventItem {
   startDate: string
   endDate?: string
   location?: string
-  status: 'upcoming' | 'completed' | 'cancelled'
+  status: Status
 }
+export type Status="upcoming" | "completed" | "cancelled";
