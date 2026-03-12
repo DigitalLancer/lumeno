@@ -10,7 +10,7 @@ function DashboardHero() {
     <div className={`relative w-full h-55 overflow-hidden bg-white border-2 border-slate-900/10 ${wobblyBorder} shadow-sm group`}>
 
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-10 -right-20 w-100 h-100 bg-purple-200/40 rounded-full blur-3xl mix-blend-multiply group-hover:bg-purple-300/40 transition-colors duration-700" />
+        <div className="absolute -top-10 -right-20 w-100 h-100 bg-purple-200/40 rounded-full blur-3xl group-hover:bg-purple-300/40 transition-colors duration-700" />
         <div className="absolute -bottom-20 -left-10 w-[350px] h-[350px] bg-blue-200/30 rounded-full blur-3xl mix-blend-multiply" />
         <svg className="absolute inset-0 w-full h-full opacity-[0.07]" xmlns="http://www.w3.org/2000/svg">
           <defs>

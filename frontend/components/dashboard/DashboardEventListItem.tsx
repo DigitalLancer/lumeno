@@ -29,7 +29,7 @@ function DashboardEventListItem({ data, index }: EventCardProps) {
         `}>
             {/* Sol Taraf: Başlık */}
             <div className="relative">
-                <p className={`font-handwriting text-lg md:text-2xl ${style.text} leading-none`}>
+                <p className={`font-handwriting text-lg md:text-xl ${style.text} leading-none`}>
                     {data.title}
                 </p>
                 {/* Alt çizgi karalaması */}

@@ -13,8 +13,8 @@ const wobblyBorder = "rounded-[255px_15px_225px_15px/15px_225px_15px_255px]";
 export default function DashboardPage() {
 
   return (
-    <div className="min-h-screen bg-[#fdfbf7] p-4 md:p-8 font-serif text-slate-800 selection:bg-yellow-200">
-      <div className="mx-auto max-w-7xl relative">
+    <div className="min-h-screen bg-[#fdfbf7] md:p-4 font-serif text-slate-800 selection:bg-yellow-200">
+      <div className="mx-auto relative">
 
         <div className="flex flex-col gap-8">
           <div className="relative group">
