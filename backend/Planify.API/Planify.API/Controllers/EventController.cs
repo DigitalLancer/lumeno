@@ -128,5 +128,17 @@ namespace Planify.API.Controllers
             evnt.Status = updatedEvent.Status;
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteEvent(int id)
+        {
+            var evnt = events.FirstOrDefault(e => e.Id == id);
+            if (evnt == null)
+            {
+                return NotFound();
+            }
+            events.Remove(evnt);
+            return NoContent();
+        }
     }
 }
