@@ -17,7 +17,8 @@ namespace Planify.API.Controllers
                 Description = "Uludağ'da hafta sonu kamp etkinliği.",
                 StartDate = new(2026, 1, 15, 14, 0, 0),
                 Location = "Uludağ, Bursa",
-                Status = "cancelled"
+                Status = "cancelled",
+                Category = "exercise"
             },
             new Event
             {
@@ -26,7 +27,8 @@ namespace Planify.API.Controllers
                 Description = "Deniz kenarında yaz festivali.",
                 StartDate = new(2026, 7, 20, 18, 0, 0),
                 Location = "Çeşme, İzmir",
-                Status = "active"
+                Status = "active",
+                Category = "entertainment"
             },
             new Event
             {
@@ -35,7 +37,8 @@ namespace Planify.API.Controllers
                 Description = "Parkta sonbahar temalı piknik.",
                 StartDate = new(2026, 10, 5, 12, 0, 0),
                 Location = "Gülhane Parkı, İstanbul",
-                Status = "active"
+                Status = "active",
+                Category = "social"
             },
             new Event
             {
@@ -44,7 +47,8 @@ namespace Planify.API.Controllers
                 Description = "Yeni projeler üzerine sohbet.",
                 StartDate = new DateTime(2026, 2, 10, 19, 0, 0),
                 Location = "Kadıköy",
-                Status = "completed"
+                Status = "completed",
+                Category = "social"
             },
             new Event
             {
@@ -53,7 +57,8 @@ namespace Planify.API.Controllers
                 Description = "Arkadaşlarla sahilde piknik organizasyonu.",
                 StartDate = new DateTime(2026, 3, 4, 11, 0, 0),
                 Location = "Caddebostan Sahili",
-                Status = "completed"
+                Status = "completed",
+                Category = "social"
             },
             new Event
             {
@@ -62,7 +67,8 @@ namespace Planify.API.Controllers
                 Description = "Belgrad Ormanı'nda sabah yürüyüşü ve kahvaltı.",
                 StartDate = new DateTime(2026, 3, 5, 9, 0, 0),
                 Location = "Belgrad Ormanı, İstanbul",
-                Status = "upcoming"
+                Status = "exercise",
+                Category = "exercise"
             },
             new Event
             {
@@ -71,7 +77,8 @@ namespace Planify.API.Controllers
                 Description = "Modern dashboard tasarımı üzerine workshop.",
                 StartDate = new DateTime(2026, 3, 12, 10, 0, 0),
                 Location = "Online",
-                Status = "upcoming"
+                Status = "upcoming",
+                Category = "education"
             },
             new Event
             {
@@ -79,7 +86,8 @@ namespace Planify.API.Controllers
                 Title = "Tech Career Day",
                 StartDate = new DateTime(2026, 3, 25, 9, 30, 0),
                 Location = "Bahçeşehir Üniversitesi",
-                Status = "upcoming"
+                Status = "upcoming",
+                Category = "work"
             }
         };
 

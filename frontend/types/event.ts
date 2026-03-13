@@ -16,8 +16,8 @@ export type Category =
   | "education"
   | "entertainment"
   | "community"
-  | "other";
-  
+  | "other"
+
 
 export const categories: Category[] = [
   "work",

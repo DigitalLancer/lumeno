@@ -5,7 +5,6 @@ import DashboardEventList from "@/components/dashboard/DashboardEventList";
 import DashboardWeeklyOverview from "@/components/dashboard/DashboardWeeklyOverview";
 import DashboardHero from "@/components/dashboard/DahsboardHero";
 import StatCard from "@/components/dashboard/StatCard";
-import CreateEventModal from "@/components/CreateEventModal";
 import Link from "next/link";
 
 const wobblyBorder = "rounded-[255px_15px_225px_15px/15px_225px_15px_255px]";
@@ -15,7 +14,6 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-[#fdfbf7] md:p-4 font-serif text-slate-800 selection:bg-yellow-200">
       <div className="mx-auto relative">
-
         <div className="flex flex-col gap-8">
           <div className="relative group">
             <DashboardHero />
@@ -29,7 +27,7 @@ export default function DashboardPage() {
               value="2"
               subtitle="events scheduled"
               icon={<Clock3 className="h-5 w-5" />}
-              bgcolor="bg-sky-100/70" // Suluboya efekti için opacity
+              bgcolor="bg-sky-100/70"
               rotate="-rotate-1"
             />
             <StatCard
@@ -103,7 +101,7 @@ export default function DashboardPage() {
   );
 }
 
-// --- Alt Bileşenler (Styled) ---
+
 
 function JournalCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
