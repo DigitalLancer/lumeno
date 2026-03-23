@@ -15,6 +15,7 @@ export default function CreateEventModal() {
   const [title, setTitle] = useState("")
   const [category, setCategory] = useState<Category | "">("");
   const [startDate, setStartDate] = useState("")
+  const [location, setLocation] = useState("")
   const [description, setDescription] = useState("")
 
   const { mutate, isPending, isError, error } = useAddEvent()
@@ -34,14 +35,16 @@ export default function CreateEventModal() {
       title,
       category,
       startDate,
+      location,
       description,
     };
 
     mutate(eventData, {
-      onSuccess: () => {        
+      onSuccess: () => {
         setTitle("");
         setCategory("");
         setStartDate("");
+        setLocation("");
         setDescription("");
         closeModal();
       },
@@ -103,6 +106,19 @@ export default function CreateEventModal() {
               type="datetime-local"
               className="w-full bg-white border-2 border-slate-900/30 rounded-xl px-4 py-2 outline-none focus:border-indigo-400 font-mono text-sm text-slate-700 transition-all"
               onChange={(e) => setStartDate(e.target.value)}
+              required
+            />
+          </div>
+
+          {/* Konum */}
+          <div className="space-y-1 font-serif">
+            <label className="block font-handwriting text-lg text-slate-600">Location*</label>
+            <input
+              type="text"
+              name="location"
+              placeholder="e.g. Office"
+              className="w-full bg-white border-2 border-slate-900/30 rounded-xl px-4 py-2 outline-none focus:border-indigo-400 font-handwriting transition-all"
+              onChange={(e) => setLocation(e.target.value)}
               required
             />
           </div>

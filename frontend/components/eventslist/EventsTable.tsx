@@ -1,7 +1,7 @@
 "use client"
 import { useMemo, useState, useEffect } from "react";
 import type { Event, Status } from '@/types/event'
-
+import { useDeleteEvent } from "@/hooks/useEvents";
 type EventTableProp = {
     data: Event[];
 }
@@ -48,6 +48,8 @@ function formatTime(iso: string) {
 
 export default function EventsTable(data: EventTableProp) {
 
+    const { mutate, isPending } = useDeleteEvent();
+
     const events = data.data;
     const [query, setQuery] = useState("");
     const [status, setStatus] = useState<Status | "all">("all");
@@ -75,14 +77,14 @@ export default function EventsTable(data: EventTableProp) {
         });
 
         return r;
-    }, [query, status, sort]);
+    }, [events, query, status, sort]);
 
     const stat = useMemo(() => {
         const upcoming = events.filter((x) => x.status === "upcoming").length;
         const completed = events.filter((x) => x.status === "completed").length;
         const cancelled = events.filter((x) => x.status === "cancelled").length;
         return { upcoming, completed, cancelled, total: events.length };
-    }, []);
+    }, [events]);
 
     return (
         <>
@@ -188,19 +190,19 @@ export default function EventsTable(data: EventTableProp) {
                                             <div className="flex justify-end gap-2 opacity-100">
                                                 <button
                                                     className="rounded-2xl bg-white px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200
-                                     hover:bg-slate-50"
+                                     hover:bg-slate-100 cursor-pointer"
                                                 >
                                                     View
                                                 </button>
                                                 <button
                                                     className="rounded-2xl bg-indigo-600 px-3 py-2 text-xs font-semibold text-white
-                                     hover:bg-indigo-700"
+                                     hover:bg-indigo-700 cursor-pointer"
                                                 >
                                                     Edit
                                                 </button>
                                                 <button
                                                     className="rounded-2xl bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-700 ring-1 ring-rose-200
-                                     hover:bg-rose-100"
+                                     hover:bg-rose-100 cursor-pointer" onClick={()=>mutate(e.id)}
                                                 >
                                                     Delete
                                                 </button>

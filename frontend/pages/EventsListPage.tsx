@@ -1,6 +1,5 @@
 "use client"
 
-import eventsJson from "@/public/mock/event.json"
 import type { Event } from "@/types/event"
 import EventsTable from "@/components/eventslist/EventsTable"
 import StatCard from "@/components/eventslist/StatCard"
@@ -13,7 +12,6 @@ export default function EventsListPage() {
   const completed = data.filter((x) => x.status === "completed").length
   const cancelled = data.filter((x) => x.status === "cancelled").length
 
-  const events = eventsJson as Event[]
   if (isLoading) return <div>Yükleniyor...</div>
   if (error) return <div>Hata oluştu!</div>
   
