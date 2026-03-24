@@ -1,18 +1,44 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getEvents, createEvent, deleteEvent } from '@/services/eventService'
+import { getEvents, getEventById, createEvent, deleteEvent, updateEvent } from '@/services/eventService'
+import {CreateEventDto } from "@/types/event";
 
 export const useEvents = () => {
   return useQuery({
-    queryKey: ['events'], // Cache anahtarı
-    queryFn: getEvents,
+    queryKey: ['events'],
+    queryFn: getEvents
   })
 }
+
+// id tipini 'number | null' olarak güncelliyoruz
+export const useEventById = (id: number | null | undefined) => {
+  return useQuery({
+    queryKey: ['events', id],
+    queryFn: () => {
+      if (typeof id !== 'number') {
+        throw new Error("ID is required for fetching");
+      }
+      return getEventById(id);
+    },
+    enabled: typeof id === 'number', 
+  });
+};
 
 export const useAddEvent = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
     mutationFn: createEvent,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['events'] })
+    }
+  })
+}
+
+export const useUpdateEvent = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({id,data}: {id: number; data: CreateEventDto;}) => updateEvent(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['events'] })
     }

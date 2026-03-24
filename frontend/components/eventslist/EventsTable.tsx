@@ -2,11 +2,16 @@
 import { useMemo, useState, useEffect } from "react";
 import type { Event, Status } from '@/types/event'
 import { useDeleteEvent } from "@/hooks/useEvents";
+import { formatDate, formatTime } from "@/lib/date";
+import { useModal } from "@/context/ModalContext";
+import Link from "next/link";
 type EventTableProp = {
     data: Event[];
 }
 
 function statusMeta(status: Status) {
+
+
     switch (status) {
         case "upcoming":
             return {
@@ -36,19 +41,10 @@ function statusMeta(status: Status) {
     }
 }
 
-function formatDateTR(iso: string) {
-    const d = new Date(iso);
-    return d.toLocaleDateString("tr-TR", { day: "2-digit", month: "long", year: "numeric" });
-}
-function formatTime(iso: string) {
-    const d = new Date(iso);
-    return d.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
-}
-
-
 export default function EventsTable(data: EventTableProp) {
 
     const { mutate, isPending } = useDeleteEvent();
+    const { openModal } = useModal()
 
     const events = data.data;
     const [query, setQuery] = useState("");
@@ -155,7 +151,6 @@ export default function EventsTable(data: EventTableProp) {
                                 return (
                                     <tr key={e.id} className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition-colors"
                                     >
-                                        {/* Event cell */}
                                         <td className="px-5 py-4">
                                             <div className="flex items-center gap-3">
                                                 <div className="min-w-0">
@@ -164,8 +159,8 @@ export default function EventsTable(data: EventTableProp) {
                                             </div>
                                         </td>
 
-                                        <td className="px-5 py-4 text-sm font-medium text-slate-800">
-                                            {formatDateTR(e.startDate)}
+                                        <td className="px-5 py-4 whitespace-nowrap text-sm font-medium text-slate-800">
+                                            {formatDate(new Date(e.startDate), "short")}
                                         </td>
 
                                         <td className="px-5 py-4 text-sm text-slate-700">
@@ -188,13 +183,13 @@ export default function EventsTable(data: EventTableProp) {
 
                                         <td className="px-5 py-4">
                                             <div className="flex justify-end gap-2 opacity-100">
-                                                <button
+                                                <Link href={`/eventdetail/${e.id}`}
                                                     className="rounded-2xl bg-white px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200
                                      hover:bg-slate-100 cursor-pointer"
                                                 >
                                                     View
-                                                </button>
-                                                <button
+                                                </Link>
+                                                <button onClick={() => openModal("updateEvent",e.id)}
                                                     className="rounded-2xl bg-indigo-600 px-3 py-2 text-xs font-semibold text-white
                                      hover:bg-indigo-700 cursor-pointer"
                                                 >
@@ -202,7 +197,7 @@ export default function EventsTable(data: EventTableProp) {
                                                 </button>
                                                 <button
                                                     className="rounded-2xl bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-700 ring-1 ring-rose-200
-                                     hover:bg-rose-100 cursor-pointer" onClick={()=>mutate(e.id)}
+                                     hover:bg-rose-100 cursor-pointer" onClick={() => mutate(e.id)}
                                                 >
                                                     Delete
                                                 </button>

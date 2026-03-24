@@ -21,7 +21,7 @@ export default function EventsListHeader() {
 
       <div className="flex items-center gap-4">
         <button
-          onClick={openModal}
+          onClick={() => openModal("createEvent")}
           className="wobbly-journal shadow bg-indigo-500/90 px-6 py-2 text-lg font-handwriting text-white 
                      hover:scale-105 transition-all rotate-1 hover:rotate-0 active:scale-95 cursor-pointer"
         >

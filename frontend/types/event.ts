@@ -28,3 +28,11 @@ export const categories: Category[] = [
   "community",
   "other",
 ];
+
+export type CreateEventDto = {
+  title: string;
+  description?: string;
+  startDate: string;
+  location?: string;
+  category?: string;
+};

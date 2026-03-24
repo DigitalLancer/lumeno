@@ -3,14 +3,13 @@ import { useEffect, useState, SubmitEvent } from "react";
 import { useModal } from "@/context/ModalContext";
 import { X } from "lucide-react";
 import { Category } from "@/types/event";
-import ModalCombobox from "./form/ModalCombobox";
-import { submitEventForm } from "@/actions";
+import ModalCombobox from "../form/ModalCombobox";
 import { useAddEvent } from "@/hooks/useEvents";
 
 
 export default function CreateEventModal() {
   const wobblyBorder = "rounded-[255px_25px_225px_25px/25px_225px_25px_255px]";
-  const { isOpen, closeModal } = useModal();
+  const { modal, closeModal } = useModal();
 
   const [title, setTitle] = useState("")
   const [category, setCategory] = useState<Category | "">("");
@@ -21,12 +20,9 @@ export default function CreateEventModal() {
   const { mutate, isPending, isError, error } = useAddEvent()
 
   useEffect(() => {
-    if (isOpen) document.body.style.overflow = "hidden";
+    if (modal.type === "createEvent") document.body.style.overflow = "hidden";
     else document.body.style.overflow = "unset";
-  }, [isOpen]);
-
-  if (!isOpen) return null;
-
+  }, [modal]);
 
   const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
@@ -54,6 +50,8 @@ export default function CreateEventModal() {
     });
   };
 
+  if (modal.type==null) return null;
+  
   return (
     <div className="fixed inset-0 z-1000 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" />

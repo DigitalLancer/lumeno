@@ -43,7 +43,7 @@ function DashboardHero() {
         </div>
 
         <button
-          onClick={openModal}
+          onClick={() => openModal("createEvent")}
           className={`
           absolute bottom-8 right-10 
           bg-indigo-500/90 text-white 

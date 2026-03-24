@@ -1,19 +1,21 @@
-import { Event } from "@/types/event";
-
-export type CreateEventDto = {
-  title: string;
-  description?: string;
-  startDate: string;
-  location?: string;
-  category?: string;
-};
-
-//const BASE_URL = http://localhost:5278/api/Event;
+import { Event, CreateEventDto } from "@/types/event";
 
 export async function getEvents(): Promise<Event[]> {
   const response = await fetch("http://localhost:5278/api/Event")
   if (!response.ok) {
     throw new Error("Failed to fetch events");
+  }
+  return response.json();
+}
+
+export async function getEventById(id:number): Promise<Event> {
+  console.log("Fetch called for:",id);
+  if (!id) {
+    throw new Error("Invalid Event ID");
+  }
+  const response = await fetch(`http://localhost:5278/api/Event/${id}`)
+  if (!response.ok) {
+    throw new Error("Failed to fetch event");
   }
   return response.json();
 }
@@ -32,6 +34,20 @@ export async function createEvent(data: CreateEventDto): Promise<Event> {
   }
 
   return response.json();
+}
+
+export async function updateEvent(id:number, data: CreateEventDto){
+  const response = await fetch(`http://localhost:5278/api/Event/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create event");
+  }
 }
 
 export async function deleteEvent(id:number) {

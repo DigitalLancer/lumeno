@@ -1,9 +1,9 @@
-import { EventItem } from '@/types/event'
+import { Event } from '@/types/event'
 import { formatDate } from '@/lib/date';
 import { Clock3 } from "lucide-react";
 
 type EventCardProps = {
-    data: EventItem,
+    data: Event,
     index: number;
 }
 

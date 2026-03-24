@@ -28,7 +28,7 @@ namespace Planify.API.Controllers
                 Description = "Deniz kenarında yaz festivali.",
                 StartDate = new(2026, 7, 20, 18, 0, 0),
                 Location = "Çeşme, İzmir",
-                Status = "active",
+                Status = "upcoming",
                 Category = "entertainment"
             },
             new Event
@@ -38,7 +38,7 @@ namespace Planify.API.Controllers
                 Description = "Parkta sonbahar temalı piknik.",
                 StartDate = new(2026, 10, 5, 12, 0, 0),
                 Location = "Gülhane Parkı, İstanbul",
-                Status = "active",
+                Status = "upcoming",
                 Category = "social"
             },
             new Event
@@ -78,7 +78,7 @@ namespace Planify.API.Controllers
                 Description = "Modern dashboard tasarımı üzerine workshop.",
                 StartDate = new DateTime(2026, 4, 20, 10, 0, 0),
                 Location = "Online",
-                Status = "upcoming",
+                Status = "cancelled",
                 Category = "education"
             },
             new Event
@@ -102,6 +102,7 @@ namespace Planify.API.Controllers
         [HttpGet("{id}")]
         public ActionResult<Event> GetEventById(int id)
         {
+            Console.WriteLine($"Fetching event with ID: {id}");
             var evnt = events.FirstOrDefault(e => e.Id == id);
             if (evnt == null)
             {
@@ -135,6 +136,7 @@ namespace Planify.API.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateEvent(int id, Event updatedEvent)
         {
+            Console.WriteLine($"Updating event with ID: {id}");
             var evnt = events.FirstOrDefault(e => e.Id == id);
             if (evnt == null)
             {
@@ -145,7 +147,6 @@ namespace Planify.API.Controllers
             evnt.Description = updatedEvent.Description;
             evnt.StartDate = updatedEvent.StartDate;
             evnt.Location = updatedEvent.Location;
-            evnt.Status = updatedEvent.Status;
             return NoContent();
         }
 

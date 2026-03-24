@@ -25,5 +25,9 @@ export function formatDate(d: Date, format: string) {
   else{
     return d.toLocaleDateString("en-EN", { day: "numeric", month: "long" })
   }
+}
 
+export function formatTime(iso: string) {
+    const d = new Date(iso);
+    return d.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
 }
