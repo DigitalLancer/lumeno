@@ -10,8 +10,6 @@ type EventTableProp = {
 }
 
 function statusMeta(status: Status) {
-
-
     switch (status) {
         case "upcoming":
             return {
