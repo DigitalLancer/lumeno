@@ -11,8 +11,8 @@ namespace Planify.API.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-        private readonly EventDbContext _context;
-        public EventController(EventDbContext context)
+        private readonly ApplicationDbContext _context;
+        public EventController(ApplicationDbContext context)
         {
             _context = context;
         }

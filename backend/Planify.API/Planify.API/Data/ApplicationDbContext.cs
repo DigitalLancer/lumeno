@@ -1,10 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Planify.API.Models;
 
 namespace Planify.API.Data
 {
-    public class EventDbContext(DbContextOptions<EventDbContext> options): DbContext(options)
+    public class ApplicationDbContext:IdentityDbContext<User>
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+
+        }
         public DbSet<Event> Events => Set<Event>();
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

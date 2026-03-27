@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Planify.API.Data;
+using Planify.API.Models;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,15 +25,26 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options
+        .UseNpgsql(connectionString)
+        .UseSnakeCaseNamingConvention());
+
+builder.Services
+    .AddIdentity<User, IdentityRole>(options =>
+    {
+        options.Password.RequireDigit = true;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequiredLength = 6;
+    })
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
-builder.Services.AddDbContext<EventDbContext>(options =>
-    options
-        .UseNpgsql(connectionString)
-        .UseSnakeCaseNamingConvention()
-);
 
 var app = builder.Build();
 
@@ -48,7 +61,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

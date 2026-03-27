@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Navbar from "@/components/Navbar/Navbar";
-import SyncfusionLicenceProvider from './providers/SyncfusionLicenceProvider'
+import SyncfusionLicenceProvider from '../providers/SyncfusionLicenceProvider'
 import { ModalProvider } from "@/context/ModalContext";
 import CreateEventModal from "@/components/modals/CreateEventModal";
-import QueryProvider from "./providers/QueryProvider";
+import QueryProvider from "../providers/QueryProvider";
 import UpdateEventModal from "@/components/modals/UpdateEventModal"
 
 const geistSans = Geist({
