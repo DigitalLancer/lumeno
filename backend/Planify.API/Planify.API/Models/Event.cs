@@ -18,10 +18,18 @@ namespace Planify.API.Models
 
         [MaxLength(500)]
         public string? Location { get; set; }
+
         public string? Description { get; set; }
+
         public string? Status { get; set; }
         
         [Required]
         public string Category { get; set; }
+
+        [Required]
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime? LastModifiedAt { get; set; }
+
     }
 }
