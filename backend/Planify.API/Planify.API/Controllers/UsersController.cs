@@ -10,12 +10,12 @@ namespace Planify.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
 
-        public UserController(ApplicationDbContext context, UserManager<User> userManager)
+        public UsersController(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -42,6 +42,17 @@ namespace Planify.API.Controllers
             };
             
             return Ok(dto);
+        }
+
+        [HttpGet("{id}/events")]
+        public async Task<ActionResult<Event>> GetEventByUserId(string id)
+        {
+            var events = await _context.Events.Where(e => e.UserId == id).ToListAsync();
+            if (events is null || !events.Any())
+            {
+                return NotFound();
+            }
+            return Ok(events);
         }
 
         [HttpGet("me")]

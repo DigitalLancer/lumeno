@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getEvents, getEventById, createEvent, deleteEvent, updateEvent } from '@/services/eventService'
+import { getEvents, getEventById,getEventsByUserId, createEvent, deleteEvent, updateEvent } from '@/services/eventService'
 import {CreateEventDto } from "@/types/event";
 
 export const useEvents = () => {
@@ -11,7 +11,7 @@ export const useEvents = () => {
 
 export const useEventById = (id: number | null | undefined) => {
   return useQuery({
-    queryKey: ['events', id],
+    queryKey: ['event', id],
     queryFn: () => {
       if (typeof id !== 'number') {
         throw new Error("ID is required for fetching");
@@ -19,6 +19,14 @@ export const useEventById = (id: number | null | undefined) => {
       return getEventById(id);
     },
     enabled: typeof id === 'number', 
+  });
+};
+
+export const useEventsByUserId = (id?: string, options?: { enabled?: boolean }) => {
+  return useQuery({
+    queryKey: ["events", "user", id],
+    queryFn: () => getEventsByUserId(id!),
+    enabled: options?.enabled ?? !!id,
   });
 };
 

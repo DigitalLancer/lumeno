@@ -1,7 +1,7 @@
 import { Event, CreateEventDto } from "@/types/event";
 
 export async function getEvents(): Promise<Event[]> {
-  const response = await fetch("http://localhost:5278/api/Event")
+  const response = await fetch("http://localhost:5278/api/Events")
   if (!response.ok) {
     throw new Error("Failed to fetch events");
   }
@@ -12,15 +12,26 @@ export async function getEventById(id:number): Promise<Event> {
   if (!id) {
     throw new Error("Invalid Event ID");
   }
-  const response = await fetch(`http://localhost:5278/api/Event/${id}`)
+  const response = await fetch(`http://localhost:5278/api/Events/${id}`)
   if (!response.ok) {
     throw new Error("Failed to fetch event");
   }
   return response.json();
 }
 
+export async function getEventsByUserId(id:string): Promise<Event[]> {
+  if (!id) {
+    throw new Error("Invalid User ID");
+  }
+  const response = await fetch(`http://localhost:5278/api/Users/${id}/events`)
+  if (!response.ok) {
+    throw new Error("Failed to fetch events");
+  }
+  return response.json();
+}
+
 export async function createEvent(data: CreateEventDto): Promise<Event> {
-  const response = await fetch("http://localhost:5278/api/Event", {
+  const response = await fetch("http://localhost:5278/api/Events", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +47,7 @@ export async function createEvent(data: CreateEventDto): Promise<Event> {
 }
 
 export async function updateEvent(id:number, data: CreateEventDto){
-  const response = await fetch(`http://localhost:5278/api/Event/${id}`, {
+  const response = await fetch(`http://localhost:5278/api/Events/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -50,7 +61,7 @@ export async function updateEvent(id:number, data: CreateEventDto){
 }
 
 export async function deleteEvent(id:number) {
-  const response = await fetch(`http://localhost:5278/api/Event/${id}`, {
+  const response = await fetch(`http://localhost:5278/api/Events/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

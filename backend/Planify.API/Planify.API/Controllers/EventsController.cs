@@ -9,10 +9,10 @@ namespace Planify.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventController : ControllerBase
+    public class EventsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public EventController(ApplicationDbContext context)
+        public EventsController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -33,17 +33,6 @@ namespace Planify.API.Controllers
                 return NotFound();
             }
             return Ok(evnt);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEventByUserId(string id)
-        {
-            var events = await _context.Events.Where(e => e.UserId == id).ToListAsync();
-            if (events is null || !events.Any())
-            {
-                return NotFound();
-            }
-            return Ok(events);
         }
 
         [HttpPost]

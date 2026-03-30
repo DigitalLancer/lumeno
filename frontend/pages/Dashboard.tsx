@@ -7,7 +7,7 @@ import DashboardHero from "@/components/dashboard/DahsboardHero";
 import StatCard from "@/components/dashboard/StatCard";
 import Link from "next/link";
 import { getTodayEvents, getThisWeeksEvents } from "@/lib/event";
-import { useEvents } from "@/hooks/useEvents";
+import { useEvents, useEventsByUserId } from "@/hooks/useEvents";
 import DashboardWeatherForecast from "@/components/dashboard/DashboardWeatherForecast";
 import { useMe, useUserById } from "@/hooks/useUser";
 
@@ -15,14 +15,16 @@ import { useMe, useUserById } from "@/hooks/useUser";
 const wobblyBorder = "rounded-[255px_15px_225px_15px/15px_225px_15px_255px]";
 
 export default function DashboardPage() {
-  const { data = [], isLoading, error } = useEvents()
+  const { data: user, isLoading: userLoading, error: userError } = useMe()
+
+  const { data: events = [], isLoading: eventsLoading, error:eventsError } = useEventsByUserId(user?.id, { enabled: !!user?.id });
 
 
-  if (isLoading) return <div>Yükleniyor...</div>
-  if (error) return <div>Hata oluştu!</div>
+  if (eventsLoading || userLoading) return <div>Yükleniyor...</div>
+  if (eventsError || userError) return <div>Hata oluştu!</div>
 
-  const todayCount = getTodayEvents(data).length
-  const weekCount = getThisWeeksEvents(data).length
+  const todayCount = getTodayEvents(events).length
+  const weekCount = getThisWeeksEvents(events).length
 
   return (
     <div className="min-h-screen bg-[#fdfbf7] md:p-4 font-serif text-slate-800 selection:bg-yellow-200">
@@ -53,7 +55,7 @@ export default function DashboardPage() {
             />
             <StatCard
               title="Total"
-              value={data.length}
+              value={events.length}
               subtitle="future events"
               icon={<Sparkles className="h-5 w-5" />}
               bgcolor="bg-orange-100/70"
@@ -79,7 +81,7 @@ export default function DashboardPage() {
                   actionLabel="View all"
                 />
                 <div className="mt-5">
-                  <DashboardEventList events={data} />
+                  <DashboardEventList events={events} />
                 </div>
               </JournalCard>
 
@@ -88,7 +90,7 @@ export default function DashboardPage() {
                   title="Weather Forecast"
                   description="Don't get weather suprises!"
                 />
-                <h2 className="opacity-80 text-sm flex gap-1 my-3"><span><MapPin size={16}/></span> Istanbul, Turkey</h2>
+                <h2 className="opacity-80 text-sm flex gap-1 my-3"><span><MapPin size={16} /></span> Istanbul, Turkey</h2>
                 <DashboardWeatherForecast></DashboardWeatherForecast>
               </JournalCard>
 
