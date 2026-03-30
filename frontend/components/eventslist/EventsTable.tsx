@@ -211,7 +211,7 @@ export default function EventsTable(data: EventTableProp) {
                                         <div className="mx-auto max-w-md">
                                             <div className="text-base font-semibold text-slate-900">No events found</div>
                                             <div className="mt-1 text-sm text-slate-600">
-                                                Arama/filtreleri gevşet veya yeni etkinlik ekle.
+                                                Change search/filters or add new events.
                                             </div>
                                             <button onClick={() => openModal("createEvent")} className="mt-4 rounded-2xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 cursor-pointer">
                                                 + Add Event

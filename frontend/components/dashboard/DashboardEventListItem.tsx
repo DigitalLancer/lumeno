@@ -1,5 +1,5 @@
 import { Event } from '@/types/event'
-import { formatDate } from '@/lib/date';
+import { formatDate, formatTime } from '@/lib/date';
 import { Clock3 } from "lucide-react";
 
 type EventCardProps = {
@@ -39,7 +39,7 @@ function DashboardEventListItem({ data, index }: EventCardProps) {
             `}>
                 <Clock3 className={`${style.text} w-5 h-5`}/>
                 <p className={`${style.text} font-mono text-xs font-semibold`}>
-                    {formatDate(new Date(data.startDate), "long")} • {time}
+                    {formatDate(new Date(data.startDate), "long")} • {formatTime(data.startDate)}
                 </p>
             </div>
             {index % 2 === 0 && (

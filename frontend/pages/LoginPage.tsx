@@ -5,11 +5,10 @@ import { Mail, Lock, ArrowRight, PenTool } from 'lucide-react';
 import Link from 'next/link';
 import { useLogin } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
-import { useMe } from "@/hooks/useUser";
 
 function LoginPage() {
     const router = useRouter();
-    const mutation = useLogin();
+    const { mutate, isPending, isError, error } = useLogin();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,7 +17,7 @@ function LoginPage() {
     function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        mutation.mutate(
+        mutate(
             { email, password, rememberMe },
             {
                 onSuccess: () => {
@@ -49,6 +48,14 @@ function LoginPage() {
                         <span className="relative z-10">Open Your Journal</span>
                     </h1>
                 </div>
+
+                {isError && (
+                    <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2 mb-5">
+                        {error instanceof Error
+                            ? error.message
+                            : "Login failed"}
+                    </div>
+                )}
 
                 <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="space-y-1">
@@ -91,17 +98,8 @@ function LoginPage() {
                                 type="checkbox"
                                 checked={rememberMe}
                                 onChange={(e) => setRememberMe(e.target.checked)} className="accent-indigo-500" />
-                            <span>Keep it open</span>
+                            <span>Remember me</span>
                         </label>
-
-                        {/* ERROR */}
-                        {mutation.isError && (
-                            <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
-                                {mutation.error instanceof Error
-                                    ? mutation.error.message
-                                    : "Login failed"}
-                            </div>
-                        )}
 
 
                         <button className="hover:text-indigo-600 transition-colors cursor-pointer underline decoration-dotted underline-offset-4">
@@ -111,7 +109,8 @@ function LoginPage() {
 
                     <button
                         type="submit"
-                        className="w-full bg-[#1e293b] text-white py-2 rounded-xl cursor-pointer font-handwriting text-lg shadow-lg hover:bg-slate-800 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 group"
+                        disabled={isPending}
+                        className="w-full bg-[#1e293b] text-white py-2 rounded-xl cursor-pointer font-handwriting text-lg shadow-lg hover:bg-slate-800 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 group disabled:cursor-not-allowed disabled:opacity-50"
                     >
                         Login
                         <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />

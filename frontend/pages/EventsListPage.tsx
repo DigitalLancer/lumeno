@@ -6,23 +6,26 @@ import StatCard from "@/components/eventslist/StatCard"
 import EventsListHeader from "@/components/eventslist/EventListHader"
 import { useEvents } from "@/hooks/useEvents"
 import ArchiveEventList from "@/components/eventslist/ArchiveEventList"
+import { useMe } from "@/hooks/useUser"
+import { useEventsByUserId } from "@/hooks/useEvents"
 
 export default function EventsListPage() {
   const today = new Date();
-  const { data = [], isLoading, error } = useEvents()
+  const { data: user, isLoading: userLoading, error: userError } = useMe()
+  const { data: events = [], isLoading: eventsLoading, error: eventsError } = useEventsByUserId(user?.id, { enabled: !!user?.id });
 
-  const upcoming = data.filter((x) => x.status === "upcoming").length
-  const completed = data.filter((x) => x.status === "completed").length
-  const cancelled = data.filter((x) => x.status === "cancelled").length
+  const upcoming = events.filter((x) => x.status === "upcoming").length
+  const completed = events.filter((x) => x.status === "completed").length
+  const cancelled = events.filter((x) => x.status === "cancelled").length
 
-  if (isLoading) return <div>Yükleniyor...</div>
-  if (error) return <div>Hata oluştu!</div>
+  if (eventsLoading) return <div>Yükleniyor...</div>
+  if (eventsError) return <div>Hata oluştu!</div>
 
-  const activeEvents = data.filter(
+  const activeEvents = events.filter(
     (event) => new Date(event.startDate) >= today
   );
 
-  const pastEvents = data.filter(
+  const pastEvents = events.filter(
     (event) => new Date(event.startDate) < today
   );
 
@@ -31,7 +34,7 @@ export default function EventsListPage() {
       <EventsListHeader />
 
       <div className="mt-8 grid grid-cols-2 gap-6 md:grid-cols-4">
-        <StatCard title="Total" value={data.length} color="bg-blue-100/70" rotate="-rotate-1" />
+        <StatCard title="Total" value={events.length} color="bg-blue-100/70" rotate="-rotate-1" />
         <StatCard title="Upcoming" value={activeEvents.length} color="bg-emerald-100/70" rotate="rotate-2" />
         <StatCard title="Completed" value={pastEvents.length} color="bg-purple-100/70" rotate="-rotate-2" />
         <StatCard title="Cancelled" value={cancelled} color="bg-rose-100/70" rotate="rotate-1" />

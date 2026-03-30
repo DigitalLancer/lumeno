@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LogOut } from "lucide-react";
+import { useLogout } from "@/hooks/useAuth";
 
 export default function VerticalNavbar() {
   const pathname = usePathname();
+  const mutation = useLogout();
 
   const menu = [
     { label: "Dashboard", href: "/dashboard", activeColor: "bg-blue-500" },
@@ -24,7 +27,6 @@ export default function VerticalNavbar() {
       <nav className="flex flex-col gap-5 w-full">
         {menu.map((item) => {
           const active = pathname === item.href;
-          
           return (
             <Link
               key={item.href}
@@ -47,14 +49,27 @@ export default function VerticalNavbar() {
               `}>
                 {item.label}
               </span>
-              
+
               {active && (
                 <div className="absolute right-0 w-1 h-6 bg-black/20 rounded-full z-20 mr-2" />
               )}
             </Link>
           );
         })}
+
+        <button
+          onClick={() => mutation.mutate()}
+          className={`
+      relative font-serif group flex items-center py-3 pl-6 transition-all duration-300
+      hover:translate-x-1 w-full text-left mt-1.5 cursor-pointer
+    `}
+        >
+          <span className="relative z-20 font-handwriting text-slate-100 group-hover:text-white flex items-center gap-2">
+            <LogOut size={24} />
+          </span>
+        </button>
       </nav>
+
     </aside>
   );
 }

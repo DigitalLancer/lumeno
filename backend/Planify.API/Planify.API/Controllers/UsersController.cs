@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace Planify.API.Controllers
             _userManager = userManager;
         }
 
+        [Authorize (Roles ="Admin")]
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetAllUser()
         {
@@ -28,6 +30,7 @@ namespace Planify.API.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserById(string id) { 
             var user=await _context.Users.FindAsync(id);
@@ -44,17 +47,15 @@ namespace Planify.API.Controllers
             return Ok(dto);
         }
 
+        [Authorize]
         [HttpGet("{id}/events")]
         public async Task<ActionResult<Event>> GetEventByUserId(string id)
         {
             var events = await _context.Events.Where(e => e.UserId == id).ToListAsync();
-            if (events is null || !events.Any())
-            {
-                return NotFound();
-            }
             return Ok(events);
         }
 
+        [Authorize]
         [HttpGet("me")]
         public async Task<IActionResult> Me()
         {

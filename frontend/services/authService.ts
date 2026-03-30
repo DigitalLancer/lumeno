@@ -20,3 +20,12 @@ export async function loginUser(data: LoginDto) {
   }
   return result;
 }
+
+export async function logout() {
+  const res = await fetch("http://localhost:5278/api/auth/logout", {
+    method: "POST",
+    credentials: "include",
+  });
+
+  if (!res.ok) throw new Error("Logout failed");
+}

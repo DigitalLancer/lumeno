@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Planify.API.Data;
 using Planify.API.Dtos;
 using Planify.API.Models;
+using System.Security.Claims;
 
 namespace Planify.API.Controllers
 {
@@ -17,6 +19,7 @@ namespace Planify.API.Controllers
             _context = context;
         }
 
+        [Authorize (Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<List<Event>>> GetAllEvents()
         {
@@ -24,6 +27,7 @@ namespace Planify.API.Controllers
             return Ok(events);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Event>> GetEventById(int id)
         {
@@ -35,6 +39,7 @@ namespace Planify.API.Controllers
             return Ok(evnt);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Event>> AddEvent([FromBody] CreateEventDto newEventDto)
         {
@@ -42,6 +47,9 @@ namespace Planify.API.Controllers
             {
                 return BadRequest();
             }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var newEvent = new Event
             {
                 Title = newEventDto.Title,
@@ -49,7 +57,8 @@ namespace Planify.API.Controllers
                 StartDate = newEventDto.StartDate,
                 Location = newEventDto.Location,
                 Category = newEventDto.Category,
-                Status = "upcoming"
+                Status = "upcoming",
+                UserId = userId,
             };
             _context.Events.Add(newEvent);
             await _context.SaveChangesAsync();
@@ -57,6 +66,7 @@ namespace Planify.API.Controllers
             return CreatedAtAction(nameof(AddEvent), new { id = newEvent.Id }, newEvent);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateEvent(int id, Event updatedEvent)
         {
@@ -78,6 +88,7 @@ namespace Planify.API.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteEvent(int id)
         {

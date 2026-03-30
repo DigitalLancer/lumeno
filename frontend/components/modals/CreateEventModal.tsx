@@ -139,7 +139,7 @@ export default function CreateEventModal() {
           <div className="pt-2">
             <button
               disabled={isPending}
-              className={`bg-indigo-500/90 text-white px-6 py-2 font-handwriting md:text-xl shadow-md transition-all 
+              className={`bg-indigo-500/90 text-white px-6 py-2 font-handwriting md:text-xl cursor-pointer shadow-md transition-all 
                                 ${!isPending && "hover:scale-110 hover:-rotate-2 active:scale-95"} 
                                 ${isPending && "opacity-70 cursor-not-allowed"}
                                 ${wobblyBorder}`}>

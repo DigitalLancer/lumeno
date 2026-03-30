@@ -1,12 +1,10 @@
 "use client";
-import { useState, useEffect } from 'react';
-import { Mail, Lock, ArrowRight, PenTool } from 'lucide-react';
-import Link from 'next/link';
-import { useLogin } from '@/hooks/useAuth';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMe } from "@/hooks/useUser";
+import LoginPage from '@/pages/LoginPage';
 
-export default function LoginPage() {
+export default function Home() {
   const router = useRouter();
   const { data: user, isLoading } = useMe();
 

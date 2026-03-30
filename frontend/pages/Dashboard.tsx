@@ -19,7 +19,6 @@ export default function DashboardPage() {
 
   const { data: events = [], isLoading: eventsLoading, error:eventsError } = useEventsByUserId(user?.id, { enabled: !!user?.id });
 
-
   if (eventsLoading || userLoading) return <div>Yükleniyor...</div>
   if (eventsError || userError) return <div>Hata oluştu!</div>
 
