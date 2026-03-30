@@ -22,11 +22,10 @@ export function getThisWeeksEvents(events: Event[]) {
 
 export function getTodayEvents(events: Event[]) {
     const now = new Date();
-
     return events.filter(event => {
         const d = new Date(event.startDate);
         const today = new Date();
         return d.toDateString() === today.toDateString();
     });
-
 }
+

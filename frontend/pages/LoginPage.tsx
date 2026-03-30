@@ -30,7 +30,6 @@ function LoginPage() {
     return (
         <div className="h-dvh bg-[#fdfbf7] flex items-center justify-center p-6 font-serif relative overflow-hidden">
 
-            {/* Arka Plan Süslemeleri (Doodles) */}
             <div className="absolute top-10 left-10 opacity-5 rotate-12 select-none pointer-events-none">
                 <span className="text-[150px] font-handwriting">Notes.</span>
             </div>
@@ -101,7 +100,6 @@ function LoginPage() {
                             <span>Remember me</span>
                         </label>
 
-
                         <button className="hover:text-indigo-600 transition-colors cursor-pointer underline decoration-dotted underline-offset-4">
                             Lost the key?
                         </button>
@@ -120,7 +118,7 @@ function LoginPage() {
                 <div className="mt-8 pt-6 border-t border-dashed border-slate-200 text-center">
                     <p className="font-handwriting text-lg text-slate-500">
                         Don't have an account yet?
-                        <Link href="/signup" className="ml-2 text-indigo-600 hover:underline decoration-wavy">
+                        <Link href="/register" className="ml-2 text-indigo-600 hover:underline decoration-wavy">
                             Get one here
                         </Link>
                     </p>

@@ -1,8 +1,8 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { LoginDto } from "@/types/auth";
-import { loginUser, logout } from "@/services/authService";
+import { LoginDto, RegisterDto } from "@/types/auth";
+import { loginUser, logout, register } from "@/services/authService";
 import { useRouter } from "next/navigation";
 
 export function useLogin() {
@@ -12,6 +12,16 @@ export function useLogin() {
     mutationFn: (data: LoginDto) => loginUser(data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["me"] });
+    },
+  });
+}
+
+export function useRegister() {
+  const router = useRouter();
+  return useMutation({
+    mutationFn: (data: RegisterDto) => register(data),
+    onSuccess: async () => {
+      router.replace("/login");
     },
   });
 }

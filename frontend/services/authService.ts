@@ -1,4 +1,22 @@
-import { LoginDto } from "@/types/auth";
+import { LoginDto, RegisterDto } from "@/types/auth";
+
+
+export async function register(data: RegisterDto) {
+  console.log("Sending register data:",data);
+  const response = await fetch("http://localhost:5278/api/Auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error("Register failed.");
+  }
+  return response;
+}
+
 
 export async function loginUser(data: LoginDto) {
   const response = await fetch("http://localhost:5278/api/Auth/login", {

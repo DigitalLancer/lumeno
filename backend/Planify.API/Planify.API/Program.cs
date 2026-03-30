@@ -67,13 +67,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-using (var scope = app.Services.CreateScope())
-{
-    var usermanager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-    const string email = "ahmetsalimusul@yahoo.com";
-    var user=await usermanager.FindByEmailAsync(email);
-    await usermanager.AddToRoleAsync(user, "Admin");
-
-}
 
 app.Run();

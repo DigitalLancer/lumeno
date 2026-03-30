@@ -15,15 +15,20 @@ import { useMe, useUserById } from "@/hooks/useUser";
 const wobblyBorder = "rounded-[255px_15px_225px_15px/15px_225px_15px_255px]";
 
 export default function DashboardPage() {
+  const today = new Date();
   const { data: user, isLoading: userLoading, error: userError } = useMe()
 
-  const { data: events = [], isLoading: eventsLoading, error:eventsError } = useEventsByUserId(user?.id, { enabled: !!user?.id });
+  const { data: events = [], isLoading: eventsLoading, error: eventsError } = useEventsByUserId(user?.id, { enabled: !!user?.id });
 
   if (eventsLoading || userLoading) return <div>Yükleniyor...</div>
   if (eventsError || userError) return <div>Hata oluştu!</div>
 
   const todayCount = getTodayEvents(events).length
   const weekCount = getThisWeeksEvents(events).length
+
+  const completedEvents = events.filter(
+    (event) => new Date(event.startDate) < today
+  );
 
   return (
     <div className="min-h-screen bg-[#fdfbf7] md:p-4 font-serif text-slate-800 selection:bg-yellow-200">
@@ -62,7 +67,7 @@ export default function DashboardPage() {
             />
             <StatCard
               title="Completed"
-              value="18"
+              value={completedEvents.length}
               subtitle="done this month"
               icon={<CheckCircle2 className="h-5 w-5" />}
               bgcolor="bg-emerald-100/70"
