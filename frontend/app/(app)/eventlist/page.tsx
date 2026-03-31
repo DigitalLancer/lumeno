@@ -1,4 +1,4 @@
-import EventsTablePage from '../../../pages/EventsListPage'
+import EventsTablePage from '../../../components/eventslist/EventsListPage'
 
 function EventList() {
   return (

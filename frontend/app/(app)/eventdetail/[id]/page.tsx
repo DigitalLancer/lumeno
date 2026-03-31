@@ -1,4 +1,4 @@
-import EventDetailPage from '@/pages/EventDetailPage'
+import EventDetailPage from '@/components/eventdetail/EventDetailPage'
 
 async function page({params}:{params:{id:string}}) {
   const {id}=await params;

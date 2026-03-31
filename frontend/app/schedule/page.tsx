@@ -1,4 +1,4 @@
-import SchedulePage from "@/pages/SchedulePage"
+import SchedulePage from "@/components/schedule/SchedulePage"
 
 function page() {
   return (

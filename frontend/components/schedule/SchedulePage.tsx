@@ -2,7 +2,7 @@
 import {
   Week, Month, Agenda, ScheduleComponent, ViewsDirective, ViewDirective, EventSettingsModel, ResourcesDirective, ResourceDirective, Inject, Resize, DragAndDrop
 } from '@syncfusion/ej2-react-schedule';
-import { timelineResourceData } from '../app/datasource';
+import { timelineResourceData } from '../../app/datasource';
 
 export default function SchedulePage() {
   const eventSettings: EventSettingsModel = { dataSource: timelineResourceData }

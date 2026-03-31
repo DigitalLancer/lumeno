@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMe } from "@/hooks/useUser";
-import LoginPage from '@/pages/LoginPage';
+import LoginPage from '@/components/login/LoginPage';
 
 export default function Home() {
   const router = useRouter();
