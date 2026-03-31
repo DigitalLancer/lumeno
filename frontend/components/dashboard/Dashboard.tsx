@@ -16,9 +16,15 @@ const wobblyBorder = "rounded-[255px_15px_225px_15px/15px_225px_15px_255px]";
 
 export default function DashboardPage() {
   const today = new Date();
+  
   const { data: user, isLoading: userLoading, error: userError } = useMe()
-
   const { data: events = [], isLoading: eventsLoading, error: eventsError } = useEventsByUserId(user?.id, { enabled: !!user?.id });
+
+  useEffect(() => {
+    window.onerror = function (msg, source, lineno, colno, error) {
+      document.body.innerHTML += `<div style="color:red">${msg}</div>`;
+    };
+  }, []);
 
   if (eventsLoading || userLoading) return <div>Yükleniyor...</div>
   if (eventsError || userError) return <div>Hata oluştu!</div>
@@ -29,11 +35,7 @@ export default function DashboardPage() {
   const completedEvents = events.filter(
     (event) => new Date(event.startDate) < today
   );
-  useEffect(() => {
-    window.onerror = function (msg, source, lineno, colno, error) {
-      document.body.innerHTML += `<div style="color:red">${msg}</div>`;
-    };
-  }, []);
+
   return (
     <div className="min-h-screen bg-[#fdfbf7] md:p-4 font-serif text-slate-800 selection:bg-yellow-200">
       <div className="mx-auto relative">
