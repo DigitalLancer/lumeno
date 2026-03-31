@@ -22,6 +22,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.x'
+          
+      - name: Restore
+        run: dotnet restore ./backend/Planify.API/Planify.API/Planify.API.csproj
 
       - name: Build with dotnet
         run: dotnet build ./backend/Planify.API/Planify.API/Planify.API.csproj --configuration Release --no-restore
