@@ -7,9 +7,9 @@ import DashboardHero from "@/components/dashboard/DahsboardHero";
 import StatCard from "@/components/dashboard/StatCard";
 import Link from "next/link";
 import { getTodayEvents, getThisWeeksEvents } from "@/lib/event";
-import { useEvents, useEventsByUserId } from "@/hooks/useEvents";
+import {useEventsByUserId } from "@/hooks/useEvents";
 import DashboardWeatherForecast from "@/components/dashboard/DashboardWeatherForecast";
-import { useMe, useUserById } from "@/hooks/useUser";
+import { useMe } from "@/hooks/useUser";
 
 
 const wobblyBorder = "rounded-[255px_15px_225px_15px/15px_225px_15px_255px]";
