@@ -30,7 +30,7 @@ function DashboardHero() {
           <p className="text-xs font-mono uppercase tracking-widest text-slate-400">Personal Planner • Vol. 01</p>
           <h1 className="text-2xl md:text-5xl font-handwriting text-slate-800 leading-tight">
             Welcome back, <span className="relative">
-              {isLoading ? "..." : data.username}
+              {isLoading ? "..." : data?.username ?? ""}
               <svg className="absolute -bottom-2 left-0 w-full h-3 text-yellow-300/60" viewBox="0 0 100 10" preserveAspectRatio="none">
                 <path d="M0 5 Q 25 2, 50 5 T 100 5" stroke="currentColor" strokeWidth="8" fill="none" strokeLinecap="round" />
               </svg>
