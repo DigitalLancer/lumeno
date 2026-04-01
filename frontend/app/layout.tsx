@@ -15,8 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Planify",
-  description: "Planify event manager",
+  title: "Lumemo",
+  description: "Lumeno event manager",
+  icons: {
+    icon: "/favicon.png",
+  }
 };
 
 export default function RootLayout({
