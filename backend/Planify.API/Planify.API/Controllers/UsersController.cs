@@ -60,9 +60,12 @@ namespace Planify.API.Controllers
         public async Task<IActionResult> Me()
         {
             if (!User.Identity?.IsAuthenticated ?? true)
-                return Unauthorized();
+                return Unauthorized(new { message = "Unauthenticated" });
 
             var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+                return Unauthorized(new { message = "User not found" });
 
             var dto = new UserInformationDto
             {
