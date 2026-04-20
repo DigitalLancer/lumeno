@@ -4,6 +4,8 @@ Planify is a full-stack personal event management application that allows users 
 
 It combines a modern Next.js frontend with a secure ASP.NET Core Web API backend, featuring authentication, user-specific data, and a responsive dashboard.
 
+Live demo: https://www.uselumeno.com/
+
 ---
 
 ## Features
